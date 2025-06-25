@@ -1,0 +1,14 @@
+{
+    "class_names": [
+        "guepard",
+        "jaguar",
+        "leopard",
+        "tigre"
+    ],
+    "class_roots": [
+        "dataset/test/guepard",
+        "dataset/test/jaguar",
+        "dataset/test/leopard",
+        "dataset/test/tigre"
+    ]
+}

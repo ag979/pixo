@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+Pillow
+opencv-python
+torch
+torchvision
+torchaudio
+scikit-learn
+numpy
+python-multipart
+qdrant-client
+pydantic-settings
+ultralytics
+prometheus-fastapi-instrumentator
