@@ -96,7 +96,7 @@ For image segmentation [YOLOE](https://docs.ultralytics.com/models/yoloe/) was u
 ### Embeddings Model Selection
 Embedding model chosen was a [resnet18](https://docs.pytorch.org/vision/main/models/generated/torchvision.models.resnet18.html) backbone trained on [ImageNet](https://www.image-net.org/)
 
-### Few-shot fine-tuning strategy
+### Few-shot Fine-tuning Strategy
 
 The embeddings model has been fine-tuned using a Prototypical Network methodology via the **train_few_shot.ipynb** notebook implemented using the [easy-few-shot-learning](https://github.com/sicara/easy-few-shot-learning) framework. Fine-tuning has increased accuracy on a refence eval from 65.40% to 88.20%.
 
@@ -108,3 +108,7 @@ The embeddings model has been fine-tuned using a Prototypical Network methodolog
 **Few-shot fine-tuned**
 
 ![](assets/model_fine_tuned.png)
+
+
+### Image Retrieval
+Fast vector search is powered by qdrant. To further speed up retrieval the collection was configured as per [3. High Precision with High-Speed Search](https://qdrant.tech/documentation/guides/optimize/#3-high-precision-with-high-speed-search), this keeps as much data in RAM as possible and uses int8 quantization with re-scoring for tunable accuracy.
