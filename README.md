@@ -13,9 +13,23 @@ The engine may be started locally by running:
 ```
 docker compose up -d --build
 ```
+The application loads all required model weights during startup. Once initialized, it becomes fully operational and ready to serve requests.
+```
+docker logs pixo-app
+...
+> 100%|██████████| 44.7M/44.7M [00:03<00:00, 12.8MB/s]
+> INFO:     Application startup complete.
+> INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+```
+## End-to-end Testing
+To run all operations supported by the engine run the following:
+```
+pytest --log-cli-level=INFO tests/integration/test.py
+```
 
-## API Usage Guide
-The API supports 3 functionalities: upload image; segment and compute segment embeddings of uploaded image, retrieve similar image.
+
+## API Usage Examples
+The API supports the following functionalities: upload image; segment and compute segment embeddings of uploaded image, retrieve similar image.
 ### Upload image
 ```
 curl -X POST "http://127.0.0.1:8000/upload" -F "file=@assets/demo_human.jpg"
@@ -35,12 +49,18 @@ curl -X POST "http://127.0.0.1:8000/search" \
   -F "file=@assets/debug_guepard.jpg"
 ```
 
+## API Documentation & Testing
+The FastAPI application provides comprehensive interactive API documentation.
 
-## End-to-end Testing
-To run all operations supported by the engine run the following:
-```
-pytest --log-cli-level=INFO tests/integration/test.py
-```
+- [Swagger UI](http://127.0.0.1:8000/docs): this allows testing all endpoints directly in the browser with file uploads, JSON responses, and results
+- [ReDoc](http://127.0.0.1:8000/redoc): API documentation
+- [OpenAPI Schema](http://127.0.0.1:8000/openapi.json): machine-readable API specification
+
+
+## Monitoring & Logging
+
+- [Prometheus Metrics](http://localhost:9090): scrapes metrics from FastAPI application **/metrics** endpoint
+- [Grafana Dashboard](http://localhost:3000): visualization platform connected to Prometheus can be used to view relevant metrics ([default username and password](https://signoz.io/guides/what-is-the-default-username-and-password-for-grafana-login-page/#grafanas-default-username-and-password))
 
 
 
@@ -51,6 +71,18 @@ Image Upload → Segmentation (YOLOE) → Embedding Generation (Few-shot fine-tu
 
 ### Segmentation Model Selection
 For image segmentation [YOLOE](https://docs.ultralytics.com/models/yoloe/) was used. This model provides open-vocab detection and segmentation capabilities in real-time, which is a good choice for extracting most meaningful image components
+
+**Original**
+
+![](assets/demo_human.jpg)
+
+**Segmentations**
+
+<p float="left">
+  <img src="assets/seg1.png" width="30%" />
+  <img src="assets/seg2.png" width="30%" />
+  <img src="assets/seg3.png" width="30%" />
+</p>
 
 
 ### Embeddings Model Selection
@@ -68,16 +100,3 @@ The embeddings model has been fine-tuned using a Prototypical Network methodolog
 **Few-shot fine-tuned**
 
 ![](assets/model_fine_tuned.png)
-
-## API Documentation & Testing
-The FastAPI application provides comprehensive interactive API documentation.
-
-- [Swagger UI](http://127.0.0.1:8000/docs): this allows testing all endpoints directly in the browser with file uploads, JSON responses, and results
-- [ReDoc](http://127.0.0.1:8000/redoc): API documentation
-- [OpenAPI Schema](http://127.0.0.1:8000/openapi.json): machine-readable API specification
-
-
-## Monitoring & Logging
-
-- [Prometheus Metrics](http://localhost:9090): scrapes metrics from FastAPI application **/metrics** endpoint
-- [Grafana Dashboard](http://localhost:3000): visualization platform connected to Prometheus can be used to view relevant metrics ([default username and password](https://signoz.io/guides/what-is-the-default-username-and-password-for-grafana-login-page/#grafanas-default-username-and-password))
