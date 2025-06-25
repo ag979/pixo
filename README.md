@@ -36,7 +36,7 @@ curl -X POST "http://127.0.0.1:8000/search" \
 ```
 
 
-## 🧪 End-to-end Testing
+## End-to-end Testing
 To run all operations supported by the engine run the following:
 ```
 pytest --log-cli-level=INFO tests/integration/test.py
