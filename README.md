@@ -22,7 +22,15 @@ docker logs pixo-app
 > INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 ```
 ## End-to-end Testing
-To run all operations supported by the engine run the following:
+To test the end-to-end functionality, please install the necessary packages
+```
+conda create -n pixo python=3.10
+conda activate pixo
+pip install -r requirements-client.txt
+```
+
+And run the following test script:
+
 ```
 pytest --log-cli-level=INFO tests/integration/test.py
 ```
