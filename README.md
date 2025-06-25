@@ -4,8 +4,8 @@ This repository contains an image search engine fine-tuned on the [my-first-proj
 The search engine can perform the following operations:
 
  - Upload images to local storage and record state in database
- - Generate segmentation masks of main image components (using [yoloe-11l-seg-pf](https://docs.ultralytics.com/models/yoloe/))
- - Generate image embeddings and save indexes to [qdrant](https://qdrant.tech/) vector database
+ - Generate segmentation masks of main image components (using [YOLOE](https://docs.ultralytics.com/models/yoloe/))
+ - Generate embeddings from segmentation masks and store them in the [qdrant](https://qdrant.tech/) vector database for indexing and similarity search 
  - Perform vector search using qdrant
 
 ## Installation
@@ -74,10 +74,10 @@ The FastAPI application provides comprehensive interactive API documentation.
 
 - [Swagger UI](http://127.0.0.1:8000/docs): this allows testing all endpoints directly in the browser with file uploads, JSON responses, and results
 - [ReDoc](http://127.0.0.1:8000/redoc): API documentation
-- [OpenAPI Schema](http://127.0.0.1:8000//openapi.json): machine-readable API specification
+- [OpenAPI Schema](http://127.0.0.1:8000/openapi.json): machine-readable API specification
 
 
 ## Monitoring & Logging
 
 - [Prometheus Metrics](http://localhost:9090): scrapes metrics from FastAPI application **/metrics** endpoint
-- [Graphana Dashboard](http://localhost:3000): visualization platform connected to Prometheus can be used to view relevant metrics ([default username and password](https://signoz.io/guides/what-is-the-default-username-and-password-for-grafana-login-page/#grafanas-default-username-and-password))
+- [Grafana Dashboard](http://localhost:3000): visualization platform connected to Prometheus can be used to view relevant metrics ([default username and password](https://signoz.io/guides/what-is-the-default-username-and-password-for-grafana-login-page/#grafanas-default-username-and-password))
